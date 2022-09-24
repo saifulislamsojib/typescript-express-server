@@ -1,5 +1,5 @@
 type AnyObject = {
-  [x: string]: unknown;
+    [x: string]: unknown;
 };
 
 export default AnyObject;
