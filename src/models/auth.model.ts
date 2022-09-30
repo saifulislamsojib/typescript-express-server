@@ -18,6 +18,8 @@ const authModel = new Schema({
     phone: {
         type: String,
         required: [true, 'Phone number is required'],
+        trim: true,
+        unique: true,
         validate: [
             (val: string) => val.trim().length === 11 && /[0-9]/.test(val),
             'Valid phone number is required',
