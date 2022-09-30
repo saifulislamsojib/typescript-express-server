@@ -1,3 +1,8 @@
+export interface LoginBody {
+    email: string;
+    password: string;
+}
+
 export interface AuthPayload {
     _id: string;
     name: string;
@@ -13,6 +18,7 @@ export interface ValidationError extends Error {
     code: number;
     keyPattern: {
         email?: string;
+        phone?: string;
     };
     errors: {
         [x: string]: {

@@ -1,9 +1,11 @@
 import { sign } from 'jsonwebtoken';
+import configs from '../configs';
 import { AuthPayload } from '../types/auth';
 
 const createJwtToken = (payload: AuthPayload): string => {
-    return sign(payload, process.env.JWT_SECRET || '', {
-        expiresIn: 182 * 24 * 60 * 60,
+    const { jwt_secret, jwt_expires } = configs;
+    return sign(payload, jwt_secret, {
+        expiresIn: jwt_expires,
     });
 };
 

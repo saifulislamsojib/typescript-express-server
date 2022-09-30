@@ -1,5 +1,3 @@
-type AnyObject = {
-    [x: string]: unknown;
-};
+type AnyObject = Record<string, unknown>;
 
 export default AnyObject;
