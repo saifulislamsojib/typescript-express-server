@@ -1,13 +1,14 @@
 import { compare, hash } from "bcrypt";
 import { Request, Response } from "express";
 import User from "../models/auth.model";
-import { AuthPayload, ValidationError } from "../types/auth";
+import AnyObject from "../types/anyObject";
+import { Auth, LoginBody, ValidationError } from "../types/auth";
 import createJwtToken from "../utils/createJwtToken";
 import getPayload from "../utils/getPayload";
 import handleError from "../utils/handleError";
 
 export const registration = async (
-  req: Request,
+  req: Request<AnyObject, AnyObject, Auth>,
   res: Response
 ): Promise<void> => {
   const { name, email, password, phone } = req.body;
@@ -26,7 +27,10 @@ export const registration = async (
   }
 };
 
-export const login = async (req: Request, res: Response): Promise<void> => {
+export const login = async (
+  req: Request<AnyObject, AnyObject, LoginBody>,
+  res: Response
+): Promise<void> => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -50,10 +54,10 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const getLoggedInUser = async (
-  req: Request<{ auth: AuthPayload }>,
+  req: Request,
   res: Response
 ): Promise<void> => {
-  const { _id } = req.params.auth;
+  const { _id } = req.auth || {};
   try {
     const user = await User.findOne({ _id });
     if (user?._id) {
