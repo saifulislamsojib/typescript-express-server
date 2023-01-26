@@ -1,5 +1,5 @@
-import AnyObject from '../types/anyObject';
-import { ValidationError } from '../types/auth';
+import type AnyObject from '../types/anyObject';
+import type { ValidationError } from '../types/auth';
 
 const handleError = (err: ValidationError): AnyObject => {
     const errors = {} as AnyObject;

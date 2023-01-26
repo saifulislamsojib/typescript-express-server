@@ -1,8 +1,8 @@
 import { compare, hash } from 'bcrypt';
-import { Request, Response } from 'express';
-import User from '../models/auth.model';
-import AnyObject from '../types/anyObject';
-import { Auth, LoginBody, ValidationError } from '../types/auth';
+import type { Request, Response } from 'express';
+import { createUser, getUserByEmail, getUserById } from '../services/auth.service';
+import type AnyObject from '../types/anyObject';
+import type { Auth, LoginBody, ValidationError } from '../types/auth';
 import createJwtToken from '../utils/createJwtToken';
 import getPayload from '../utils/getPayload';
 import handleError from '../utils/handleError';
@@ -11,11 +11,10 @@ export const registration = async (
     req: Request<AnyObject, AnyObject, Auth>,
     res: Response,
 ): Promise<void> => {
-    const { name, email, password, phone } = req.body;
+    const { name, email, password: plainPassword, phone } = req.body;
     try {
-        const hashedPassword = await hash(password, 10);
-        const newUser = new User({ name, email, password: hashedPassword, phone });
-        const user = await newUser.save();
+        const password = await hash(plainPassword, 10);
+        const user = await createUser({ name, email, password, phone });
         const payload = getPayload(user);
         const token = createJwtToken(payload);
         res.status(201).json({ auth: payload, token, message: 'Account Register Successfully' });
@@ -31,7 +30,7 @@ export const login = async (
 ): Promise<void> => {
     const { email, password } = req.body;
     try {
-        const user = await User.findOne({ email });
+        const user = await getUserByEmail(email);
         if (user?._id) {
             const isValidPassword = await compare(password, user.password);
             if (isValidPassword) {
@@ -50,9 +49,9 @@ export const login = async (
 };
 
 export const getLoggedInUser = async (req: Request, res: Response): Promise<void> => {
-    const { _id } = req.auth || {};
+    const { _id } = req.auth!;
     try {
-        const user = await User.findOne({ _id });
+        const user = await getUserById(_id);
         if (user?._id) {
             const auth = getPayload(user);
             res.status(201).json({ auth });
