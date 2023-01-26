@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import configs from "./configs";
 import mongoConnect from "./db/db";
+import errorHandler, { notFound } from "./middleware/errorHandler.middleware";
 import apiRoute from "./routes/api.routes";
 import authRoute from "./routes/auth.routes";
 import rootRoute from "./routes/root.routes";
@@ -20,6 +21,10 @@ mongoConnect();
 app.use("/", rootRoute);
 app.use("/api", apiRoute);
 app.use("/auth", authRoute);
+
+// error handler
+app.use(notFound);
+app.use(errorHandler);
 
 // listen server
 server.listen(port, () => {

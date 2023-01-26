@@ -9,7 +9,6 @@ const mongoConnect = async () => {
     return mongo;
   } catch (error) {
     console.log("Database connection error", error);
-    return undefined;
   }
 };
 
