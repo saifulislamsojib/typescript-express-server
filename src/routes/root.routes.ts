@@ -1,8 +1,8 @@
-import express, { Request, Response } from 'express';
+import { Router } from 'express';
 
-const rootRoute = express.Router();
+const rootRoute = Router();
 
-rootRoute.get('/', (_req: Request, res: Response) => {
+rootRoute.get('/', (_req, res) => {
     res.send('Welcome to the server boss!');
 });
 

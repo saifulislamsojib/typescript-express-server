@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import type { Auth } from '../types/auth';
+import { Auth } from '../types/auth';
 
 const authModel = new Schema({
     name: {

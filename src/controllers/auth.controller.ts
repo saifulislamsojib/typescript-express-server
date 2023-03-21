@@ -1,16 +1,13 @@
 import { compare, hash } from 'bcrypt';
-import type { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { createUser, getUserByEmail, getUserById } from '../services/auth.service';
-import type AnyObject from '../types/anyObject';
-import type { Auth, LoginBody, ValidationError } from '../types/auth';
+import AnyObject from '../types/anyObject';
+import { Auth, LoginBody, ValidationError } from '../types/auth';
 import createJwtToken from '../utils/createJwtToken';
 import getPayload from '../utils/getPayload';
 import handleError from '../utils/handleError';
 
-export const registration = async (
-    req: Request<AnyObject, AnyObject, Auth>,
-    res: Response,
-): Promise<void> => {
+export const registration = async (req: Request<AnyObject, AnyObject, Auth>, res: Response) => {
     const { name, email, password: plainPassword, phone } = req.body;
     try {
         const password = await hash(plainPassword, 10);
@@ -24,10 +21,7 @@ export const registration = async (
     }
 };
 
-export const login = async (
-    req: Request<AnyObject, AnyObject, LoginBody>,
-    res: Response,
-): Promise<void> => {
+export const login = async (req: Request<AnyObject, AnyObject, LoginBody>, res: Response) => {
     const { email, password } = req.body;
     try {
         const user = await getUserByEmail(email);
@@ -48,7 +42,7 @@ export const login = async (
     }
 };
 
-export const getLoggedInUser = async (req: Request, res: Response): Promise<void> => {
+export const getLoggedInUser = async (req: Request, res: Response) => {
     const { _id } = req.auth!;
     try {
         const user = await getUserById(_id);
