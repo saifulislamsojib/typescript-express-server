@@ -1,12 +1,12 @@
 import { compare, hash } from "bcrypt";
-import type { Request, Response } from "express";
+import { Request, Response } from "express";
 import {
   createUser,
   getUserByEmail,
   getUserById,
 } from "../services/auth.service";
-import type AnyObject from "../types/anyObject";
-import type { Auth, LoginBody, ValidationError } from "../types/auth";
+import AnyObject from "../types/anyObject";
+import { Auth, LoginBody, ValidationError } from "../types/auth";
 import createJwtToken from "../utils/createJwtToken";
 import getPayload from "../utils/getPayload";
 import handleError from "../utils/handleError";

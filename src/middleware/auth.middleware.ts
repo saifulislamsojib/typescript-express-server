@@ -1,7 +1,7 @@
-import type { NextFunction, Request, Response } from "express";
+import { RequestHandler } from "express";
 import checkJWT from "../utils/checkJWT";
 
-const authCheck = (req: Request, res: Response, next: NextFunction): void => {
+const authCheck: RequestHandler = (req, res, next): void => {
   const token = req.headers.authorization;
   try {
     const auth = checkJWT(token);

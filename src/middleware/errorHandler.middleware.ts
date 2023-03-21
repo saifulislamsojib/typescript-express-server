@@ -1,15 +1,10 @@
-import type { NextFunction, Request, Response } from "express";
+import { ErrorRequestHandler, RequestHandler } from "express";
 
-export const notFound = (_req: Request, res: Response) => {
+export const notFound: RequestHandler = (_req, res) => {
   res.status(404).send("Requested URL is not found");
 };
 
-const errorHandler = (
-  err: Error,
-  _req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const errorHandler: ErrorRequestHandler = (err, _req, res, next) => {
   if (res.headersSent) {
     next("There was a problem!");
     return;
