@@ -14,7 +14,7 @@ import handleError from "../utils/handleError";
 export const registration = async (
   req: Request<AnyObject, AnyObject, Auth>,
   res: Response
-): Promise<void> => {
+) => {
   const { name, email, password: plainPassword, phone } = req.body;
   try {
     const password = await hash(plainPassword, 10);
@@ -33,7 +33,7 @@ export const registration = async (
 export const login = async (
   req: Request<AnyObject, AnyObject, LoginBody>,
   res: Response
-): Promise<void> => {
+) => {
   const { email, password } = req.body;
   try {
     const user = await getUserByEmail(email);
@@ -56,10 +56,7 @@ export const login = async (
   }
 };
 
-export const getLoggedInUser = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const getLoggedInUser = async (req: Request, res: Response) => {
   const { _id } = req.auth!;
   try {
     const user = await getUserById(_id);
