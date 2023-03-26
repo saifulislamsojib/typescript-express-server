@@ -1,5 +1,5 @@
-import User from "../models/auth.model";
-import { Auth } from "../types/auth";
+import User from "@/models/auth.model";
+import { Auth } from "@/types/auth";
 
 export const createUser = (user: Omit<Auth, "_id">) => {
   const newUser = new User(user);
