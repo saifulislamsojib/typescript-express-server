@@ -3,8 +3,8 @@ import {
   getLoggedInUser,
   login,
   registration,
-} from "../controllers/auth.controller";
-import authCheck from "../middleware/auth.middleware";
+} from "@/controllers/auth.controller";
+import authCheck from "@/middleware/auth.middleware";
 
 const authRoute = Router();
 

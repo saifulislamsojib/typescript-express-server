@@ -1,6 +1,6 @@
 import { verify } from "jsonwebtoken";
-import configs from "../configs";
-import { AuthPayload } from "../types/auth";
+import configs from "@/configs";
+import { AuthPayload } from "@/types/auth";
 
 const checkJWT = (token?: string): AuthPayload | null => {
   if (token && token.startsWith("Bearer ") && token.split(" ")[1]) {

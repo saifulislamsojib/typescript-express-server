@@ -1,15 +1,15 @@
-import { compare, hash } from "bcrypt";
-import { Request, Response } from "express";
 import {
   createUser,
   getUserByEmail,
   getUserById,
-} from "../services/auth.service";
-import AnyObject from "../types/anyObject";
-import { Auth, LoginBody, ValidationError } from "../types/auth";
-import createJwtToken from "../utils/createJwtToken";
-import getPayload from "../utils/getPayload";
-import handleError from "../utils/handleError";
+} from "@/services/auth.service";
+import AnyObject from "@/types/anyObject";
+import { Auth, LoginBody, ValidationError } from "@/types/auth";
+import createJwtToken from "@/utils/createJwtToken";
+import getPayload from "@/utils/getPayload";
+import handleError from "@/utils/handleError";
+import { compare, hash } from "bcrypt";
+import { Request, Response } from "express";
 
 export const registration = async (
   req: Request<AnyObject, AnyObject, Auth>,
