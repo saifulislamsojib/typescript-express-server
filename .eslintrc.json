@@ -29,6 +29,7 @@
     "plugin:import/typescript"
   ],
   "parser": "@typescript-eslint/parser",
+  "ignorePatterns": ["dist/"],
   "plugins": ["@typescript-eslint", "import"],
   "root": true,
   "rules": {
