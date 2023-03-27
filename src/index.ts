@@ -28,5 +28,5 @@ app.use(errorHandler);
 
 // listen server
 server.listen(port, () => {
-    console.log(`Hello Boss! I am listening at http://localhost:${port}`);
+  console.log(`Hello Boss! I am listening at http://localhost:${port}`);
 });

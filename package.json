@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
-    "build": "tsc -p .",
+    "dev": "nodemon --exec \"yarn lint:check && nodemon -r tsconfig-paths/register\" src/index.ts",
+    "build": "yarn lint && tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "lint:fix": "eslint ./src --ext .ts --quiet --fix --ignore-path ./.gitignore",
+    "lint:check": "eslint ./src --ext .ts --ignore-path ./.gitignore",
+    "lint:format": "prettier  --loglevel warn --write \"./**/*.{ts,md,json,d.ts}\"",
+    "lint": "yarn lint:format && yarn lint:fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -31,11 +35,15 @@
     "eslint": "^8.36.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.21",
     "prettier": "^2.8.6",
     "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.4",
+    "tsconfig-paths": "^4.1.2",
     "typescript": "^5.0.2"
   }
 }
