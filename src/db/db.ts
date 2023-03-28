@@ -1,5 +1,5 @@
-import { connect } from "mongoose";
 import configs from "@/configs";
+import { connect } from "mongoose";
 
 // database connection with mongoose
 const mongoConnect = async () => {

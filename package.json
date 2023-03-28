@@ -7,7 +7,7 @@
     "start": "node dist/index.js",
     "dev": "nodemon --exec \"yarn lint && nodemon -r tsconfig-paths/register\" src/index.ts",
     "build": "yarn lint && tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
-    "lint": "npx eslint ./src --ext .ts --quiet --fix --ignore-path ./.gitignore",
+    "lint": "eslint ./src --ext .ts --quiet --fix --ignore-path ./.gitignore",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

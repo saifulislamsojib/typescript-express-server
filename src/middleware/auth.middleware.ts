@@ -1,5 +1,5 @@
-import { RequestHandler } from "express";
 import checkJWT from "@/utils/checkJWT";
+import { RequestHandler } from "express";
 
 const authCheck: RequestHandler = (req, res, next): void => {
   const token = req.headers.authorization;
