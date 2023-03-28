@@ -1,6 +1,6 @@
-import { sign } from "jsonwebtoken";
 import configs from "@/configs";
 import { AuthPayload } from "@/types/auth";
+import { sign } from "jsonwebtoken";
 
 const createJwtToken = (payload: AuthPayload): string => {
   const { jwt_secret, jwt_expires } = configs;
