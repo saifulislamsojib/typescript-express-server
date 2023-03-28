@@ -11,7 +11,12 @@ export const registration = async (req: Request<AnyObject, AnyObject, Auth>, res
   const { name, email, password: plainPassword, phone } = req.body;
   try {
     const password = await hash(plainPassword, 10);
-    const user = await createUser({ name, email, password, phone });
+    const user = await createUser({
+      name,
+      email,
+      password,
+      phone,
+    });
     const payload = getPayload(user);
     const token = createJwtToken(payload);
     res.status(201).json({ auth: payload, token, message: 'Account Register Successfully' });

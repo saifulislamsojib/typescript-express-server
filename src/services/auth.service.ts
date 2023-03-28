@@ -1,15 +1,8 @@
 import User from '@/models/auth.model';
 import { Auth } from '@/types/auth';
 
-export const createUser = (user: Omit<Auth, '_id'>) => {
-  const newUser = new User(user);
-  return newUser.save();
-};
+export const createUser = (user: Omit<Auth, '_id'>) => new User(user).save();
 
-export const getUserByEmail = (email: string) => {
-  return User.findOne({ email });
-};
+export const getUserByEmail = (email: string) => User.findOne({ email });
 
-export const getUserById = (id: string) => {
-  return User.findOne({ id });
-};
+export const getUserById = (id: string) => User.findOne({ id });
