@@ -1,18 +1,17 @@
 import checkJWT from "@/utils/checkJWT";
 import { RequestHandler } from "express";
 
-const authCheck: RequestHandler = (req, res, next): void => {
-  const token = req.headers.authorization;
+const authCheck: RequestHandler = (req, res, next) => {
+  const { authorization } = req.headers;
   try {
-    const auth = checkJWT(token);
+    const auth = checkJWT(authorization);
     if (auth) {
       req.auth = auth;
-      next();
-    } else {
-      res.status(401).json({ message: "Invalid token" });
+      return next();
     }
+    return res.status(401).json({ message: "Invalid token" });
   } catch (err) {
-    res.status(401).json({ message: "Invalid token" });
+    return res.status(401).json({ message: "Invalid token" });
   }
 };
 
