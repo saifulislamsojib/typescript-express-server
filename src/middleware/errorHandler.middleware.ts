@@ -6,10 +6,9 @@ export const notFound: RequestHandler = (_req, res) => {
 
 const errorHandler: ErrorRequestHandler = (err, _req, res, next) => {
   if (res.headersSent) {
-    next('There was a problem!');
-    return;
+    return next('There was a problem!');
   }
-  res.status(500).send(err.message || 'Something went wrong!');
+  return res.status(500).send(err.message || 'Something went wrong!');
 };
 
 export default errorHandler;
