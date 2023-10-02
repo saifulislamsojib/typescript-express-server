@@ -19,7 +19,7 @@ mongoConnect();
 
 // all routes
 app.use("/", rootRoute);
-app.use("/api", apiRoute);
+app.use("/api/v1", apiRoute);
 app.use("/auth", authRoute);
 
 // error handler
